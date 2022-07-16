@@ -1,3 +1,5 @@
+// Libreria de 3ros
+const axios = require('axios')
 
 class Busquedas {
     historial = []
@@ -8,8 +10,19 @@ class Busquedas {
 
     // Buscar una ciudad
     async ciudad( lugar =''){
-        // Peticion http
-        console.log(lugar)
+       
+        try {
+             // Peticion http
+            // console.log('Ciudad: ',lugar)
+            const respuesta = await axios.get('https://reqres.in/api/users?page=2')
+            console.log(respuesta.data)
+
+            return []
+
+        } catch (error) {
+            return []
+        }
+        
 
         return [] //Retorna los lugares que coincidan con el lugar que escribe la persona
     }
