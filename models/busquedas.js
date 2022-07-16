@@ -14,7 +14,7 @@ class Busquedas {
         try {
              // Peticion http
             // console.log('Ciudad: ',lugar)
-            const respuesta = await axios.get('https://reqres.in/api/users?page=2')
+            const respuesta = await axios.get('https://api.mapbox.com/geocoding/v5/mapbox.places/carta.json?country=co&language=es&access_token=pk.eyJ1IjoiamFja3NvbjAxIiwiYSI6ImNsNW8zOWxsdzA4M2gzY21vZ3ZrMW53Zm8ifQ.qEkMkuZf11kQ8F5Q-ohWyg')
             console.log(respuesta.data)
 
             return []
