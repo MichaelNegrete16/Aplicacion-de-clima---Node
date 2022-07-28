@@ -1,2 +1,5 @@
 /node_modules
 /tokens.txt
+
+# Variables de entorno
+.env

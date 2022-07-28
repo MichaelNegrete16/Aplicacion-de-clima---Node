@@ -1,3 +1,6 @@
+// Importaciones
+// Dependencia para poder leer las variables de entorno de archivos .env
+require('dotenv').config()
 // Helpers
 const { leerInput, inquirerMenu, pausa } = require("./helpers/inquirer");
 // Models
