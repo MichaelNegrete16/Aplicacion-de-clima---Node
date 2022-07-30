@@ -2,7 +2,7 @@
 // Dependencia para poder leer las variables de entorno de archivos .env
 require('dotenv').config()
 // Helpers
-const { leerInput, inquirerMenu, pausa } = require("./helpers/inquirer");
+const { leerInput, inquirerMenu, pausa, listarLugares } = require("./helpers/inquirer");
 // Models
 const Busquedas = require("./models/busquedas");
 
@@ -19,19 +19,21 @@ const main = async() => {
         switch (opt) {
             case 1:
                 // Mostrar mensaje
-                const lugar = await leerInput('Ciudad: ')
-                await busqueda.ciudad(lugar)
+                const termino = await leerInput('Ciudad: ')
+
                 // Buscar la ciudad o lugar
+                const lugares = await busqueda.ciudad(termino)
 
                 // Seleccionar el lugar
-
+                const id = await listarLugares(lugares)
+                const lugarSel = lugares.find( l => l.id === id )
                 // Datos del clima
 
                 // Mostrar resultados
                 console.log('\nInformacion de la ciudad\n'.green)
-                console.log('Ciudad:',)
-                console.log('Latitud:',)
-                console.log('Longitud:',)
+                console.log('Ciudad:', lugarSel.nombre)
+                console.log('Latitud:',lugarSel.lat)
+                console.log('Longitud:', lugarSel.lng)
                 console.log('Temperatura:',)
                 console.log('Temperatura Minima:',)
                 console.log('Temperatura Maxima:',)
