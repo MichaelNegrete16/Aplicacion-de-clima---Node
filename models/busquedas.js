@@ -1,8 +1,11 @@
+// Librerias de node
+const fs = require('fs')
 // Libreria de 3ros
 const axios = require('axios')
 
 class Busquedas {
     historial = []
+    dbPath = './db/database.json'
 
     constructor(){
         // Todo: leer Db si existe
@@ -71,6 +74,31 @@ class Busquedas {
         } catch (error) {
             console.log(error)
         }
+
+    }
+
+    agregarHistorial(lugar = ''){
+        // Evitar duplicados
+        // Si ya existe el valor hara un return y no lo guardara de nuevo
+        if(this.historial.includes( lugar.toLocaleLowerCase() )){
+            return
+        }
+        // si no existe lo guarda
+        this.historial.unshift( lugar.toLocaleLowerCase() )
+
+        // Grabar en DB
+        this.guardarDB()
+    }
+
+    guardarDB(){
+        const payload = {
+            historial: this.historial
+        }
+        fs.writeFileSync(this.dbPath, JSON.stringify(payload))
+
+    }
+
+    leerDB(){
 
     }
 
