@@ -9,6 +9,18 @@ class Busquedas {
 
     constructor(){
         // Todo: leer Db si existe
+        this.leerDB()
+    }
+
+    get historialCapitalizado(){
+        return this.historial.map( lugar => {
+
+            let palabras = lugar.split(' ')
+            palabras = palabras.map( p => p[0].toUpperCase() + p.substring(1))
+
+            return palabras.join('')
+
+        } )
     }
 
     get paramsMapbox(){
@@ -95,11 +107,17 @@ class Busquedas {
             historial: this.historial
         }
         fs.writeFileSync(this.dbPath, JSON.stringify(payload))
-
     }
 
     leerDB(){
-
+        // Debe de existir
+        if(!fs.existsSync(this.dbPath)) return
+        // Leer archivo si existe
+        const info = fs.readFileSync(this.dbPath, {encoding:'utf-8'})
+        // Parsear dato
+        const data = JSON.parse(info)
+        // Asignar los valores a la variable para mostrarlos
+        this.historial = data.historial
     }
 
 }
